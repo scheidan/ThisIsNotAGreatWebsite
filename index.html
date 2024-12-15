@@ -1,72 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>You wont believe what you see</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    background: #3944;
-    font-family: sans-serif;
-  }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>You wont believe what you see</title>
+    <style>
+      body {
+	  margin: 0;
+	  padding: 0;
+	  background: #3944;
+	  font-family: sans-serif;
+      }
 
-  .container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 10px;
-    box-sizing: border-box;
-    background: pink;
-  }
+      .container {
+	  display: grid;
+	  grid-template-columns: 1fr;
+	  gap: 10px;
+	  padding: 10px;
+	  box-sizing: border-box;
+	  background: pink;
+      }
 
-  .container img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
+      .container img {
+	  width: 100%;
+	  height: auto;
+	  display: block;
+      }
 
-  @media (min-width: 768px) {
-    .container {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-</style>
-</head>
-<body>
-  <div class="container">
-    <img src="scans/page1.jpg" alt="Page 1">
-    <img src="scans/page2.jpg" alt="Page 2" usemap="#map2">
-    <img src="scans/page3.jpg" alt="Page 3">
-    <img src="scans/page4.jpg" alt="Page 4" usemap="#map4">
-  </div>
+      @media (min-width: 768px) {
+	  .container {
+	      grid-template-columns: 1fr 1fr;
+	  }
+      }
 
-  <!-- define areas for hyperlinks -->
-  <map name="map2">
-    <!-- Adjust coords based on your desired clickable area -->
-    <area shape="rect" coords="100,100,650,280"
-	  href="https://plw.me/wp-content/uploads/calvin-and-hobbes_comic04.gif" alt="Wisdom">
+      .image-wrapper {
+	  position: relative;
+      }
 
-    <area shape="rect" coords="100,450,650,600"
-	  href="https://www.moma.org/" alt="moma no momos">
+      .highlight {
+	  position: absolute;
+	  border: 2px dashed rgba(255,0,0,0.7);
+	  background: rgba(255,0,0,0.1);
+	  pointer-events: none;
+	  box-sizing: border-box;
+      }
 
-    <area shape="rect" coords="100,710,650,900"
-	  href="https://baqoz.com/" alt="Coolest Art studio">
-  </map>
-
-  <map name="map4">
-    <!-- Adjust coords based on your desired clickable area -->
-    <area shape="rect" coords="100,300,600,550"
-	  href="https://hmpg.net/" alt="The end...">
-  </map>
+      .highlight:after {
+	  content: "Tap Here";
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
+	  color: #fff;
+	  background: rgba(0,0,0,0.7);
+	  padding: 4px 8px;
+	  font-size: 14px;
+	  border-radius: 4px;
+	  pointer-events: none;
+      }
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/image-map-resizer/1.0.10/imageMapResizer.min.js"></script>
-  <script>
-    window.addEventListener('load', function() {
-      imageMapResize();
-    });
-  </script>
-</body>
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Image 1 with map1 -->
+      <div class="image-wrapper">
+	<img src="scans/page1.jpg" alt="Page 1" usemap="#map1">
+      </div>
+
+      <!-- Image 2 with map2 -->
+      <div class="image-wrapper">
+	<img src="scans/page2.jpg" alt="Page 2" usemap="#map2">
+      </div>
+
+      <!-- Image 3 with map3 -->
+      <div class="image-wrapper">
+	<img src="scans/page3.jpg" alt="Page 3" usemap="#map3">
+      </div>
+
+      <!-- Image 4 with map4 -->
+      <div class="image-wrapper">
+	<img src="scans/page4.jpg" alt="Page 4" usemap="#map4">
+      </div>
+    </div>
+
+    <!-- define areas for hyperlinks -->
+    <map name="map1">
+    </map>
+
+    <map name="map2">
+      <!-- Adjust coords based on your desired clickable area -->
+      <area shape="rect" coords="100,100,650,280"
+	    href="https://plw.me/wp-content/uploads/calvin-and-hobbes_comic04.gif" alt="Wisdom">
+
+      <area shape="rect" coords="100,450,650,600"
+	    href="https://www.moma.org/" alt="moma no momos">
+
+      <area shape="rect" coords="100,710,650,900"
+	    href="https://baqoz.com/" alt="Coolest Art studio">
+    </map>
+
+    <map name="map3">
+    </map>
+
+    <map name="map4">
+      <!-- Adjust coords based on your desired clickable area -->
+      <area shape="rect" coords="100,300,600,550"
+	    href="https://hmpg.net/" alt="The end...">
+    </map>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/image-map-resizer/1.0.10/imageMapResizer.min.js"></script>
+    <script>
+      window.addEventListener('load', function() {
+	  imageMapResize();
+      });
+    </script>
+    <script>
+      window.addEventListener('load', function() {
+	  imageMapResize();
+
+	  // For each image with a usemap, find its areas and create highlights
+	  document.querySelectorAll('img[usemap]').forEach(img => {
+              const mapName = img.getAttribute('usemap').replace('#', '');
+              const map = document.querySelector('map[name="'+mapName+'"]');
+              if (!map) return; // no map found for this image
+
+              const wrapper = img.closest('.image-wrapper');
+              if (!wrapper) return;
+
+              // For each area in the map, create a highlight
+              map.querySelectorAll('area').forEach(area => {
+		  const coords = area.getAttribute('coords').split(',').map(Number);
+		  const [x1, y1, x2, y2] = coords;
+
+		  const highlight = document.createElement('div');
+		  highlight.className = 'highlight';
+		  highlight.style.top = y1 + 'px';
+		  highlight.style.left = x1 + 'px';
+		  highlight.style.width = (x2 - x1) + 'px';
+		  highlight.style.height = (y2 - y1) + 'px';
+
+		  wrapper.appendChild(highlight);
+              });
+	  });
+      });
+    </script>
+  </body>
 </html>
