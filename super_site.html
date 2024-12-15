@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Responsive Image Layout with Clickable Areas</title>
+<title>You wont believe what you see</title>
 <style>
   body {
     margin: 0;
     padding: 0;
-    background: #fff;
+    background: #3944;
     font-family: sans-serif;
   }
 
@@ -18,7 +18,7 @@
     gap: 10px;
     padding: 10px;
     box-sizing: border-box;
-    background: white;
+    background: pink;
   }
 
   .container img {
@@ -36,16 +36,31 @@
 </head>
 <body>
   <div class="container">
-    <img src="scans/page1.jpg" alt="Page 1" usemap="#map1">
-    <img src="scans/page2.jpg" alt="Page 2">
+    <img src="scans/page1.jpg" alt="Page 1">
+    <img src="scans/page2.jpg" alt="Page 2" usemap="#map2">
     <img src="scans/page3.jpg" alt="Page 3">
-    <img src="scans/page4.jpg" alt="Page 4">
+    <img src="scans/page4.jpg" alt="Page 4" usemap="#map4">
   </div>
 
-  <map name="map1">
+  <!-- define areas for hyperlinks -->
+  <map name="map2">
     <!-- Adjust coords based on your desired clickable area -->
-    <area shape="rect" coords="50,50,200,200" href="https://example.com" alt="Example Link">
+    <area shape="rect" coords="100,100,650,280"
+	  href="https://plw.me/wp-content/uploads/calvin-and-hobbes_comic04.gif" alt="Wisdom">
+
+    <area shape="rect" coords="100,450,650,600"
+	  href="https://www.moma.org/" alt="moma no momos">
+
+    <area shape="rect" coords="100,710,650,900"
+	  href="https://baqoz.com/" alt="Coolest Art studio">
   </map>
+
+  <map name="map4">
+    <!-- Adjust coords based on your desired clickable area -->
+    <area shape="rect" coords="100,300,600,550"
+	  href="https://hmpg.net/" alt="The end...">
+  </map>
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/image-map-resizer/1.0.10/imageMapResizer.min.js"></script>
   <script>
